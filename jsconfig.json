@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "paths": {
+            "@/components/*": [
+                "src/components/*"
+            ],
+            "@/pages/*": [
+                "src/pages/*"
+            ],
+            "@/public/*": [
+                "src/public/*"
+            ],
+            "@/style/*": [
+                "src/public/style/*"
+            ]
+        }
+    },
+    "exclude": [
+        "dist",
+        ".next",
+        "out",
+        "node_modules",
+        "next.config.js",
+        "coverage"
+    ],
+    "include": [
+        "**/*.js"
+    ]
+}
