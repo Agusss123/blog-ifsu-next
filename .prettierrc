@@ -1,0 +1,12 @@
+{
+  "semi": false,
+  "tabWidth": 2,
+  "[javascript]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false
+  },
+  "printWidth": 125,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "jsxBracketSameLine": true
+}
