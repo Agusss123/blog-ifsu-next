@@ -2,7 +2,7 @@ import { Box, Text } from '@mantine/core'
 
 export default function Home() {
   return (
-    <Box>
+    <Box mt={75}>
       <Text color="black" mt="sm">
         Test
       </Text>

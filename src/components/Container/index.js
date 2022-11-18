@@ -1,15 +1,17 @@
 import { AppShell } from '@mantine/core'
+import { DefaultHeader } from '@/components/Header'
 
 export const Container = ({ children }) => {
   return (
     <AppShell
       styles={{
         main: {
-          background: '#FFFFFF',
-          padding: '10px'
+          padding: '0px'
         }
       }}
-      fixed>
+      px={50}
+      fixed
+      header={<DefaultHeader />}>
       {children}
     </AppShell>
   )
