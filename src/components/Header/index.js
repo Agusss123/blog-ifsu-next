@@ -47,7 +47,7 @@ export const DefaultHeader = () => {
     <Box position="fixed">
       <Header height={70} px={50}>
         <Group position="apart" sx={{ height: '100%' }}>
-          <Group flex align="center" position="center" spacing="xs">
+          <Group align="center" position="center" spacing="xs">
             <DefaultLogo />
             <Text mt={1} weight={800}>
               Vinyles
