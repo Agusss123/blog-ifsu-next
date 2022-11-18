@@ -7,7 +7,8 @@ const nextConfig = {
   swcMinify: true,
   env: {
     SITE_NAME: 'Next Mantine',
-    BASE_URL: isProd ? 'http://localhost:3000' : 'http://localhost:3000'
+    BASE_URL: isProd ? process.env.BASE_URL : 'http://localhost:3000',
+    API_URL: isProd ? process.env.API_URL : 'http://localhost:3000'
   }
 }
 
