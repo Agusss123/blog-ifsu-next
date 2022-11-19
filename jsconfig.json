@@ -1,19 +1,29 @@
 {
     "compilerOptions": {
         "jsx": "preserve",
+        "baseUrl": ".",
         "paths": {
             "@/components/*": [
-                "src/components/*"
+                "./src/components/*"
             ],
             "@/pages/*": [
-                "src/pages/*"
+                "./src/pages/*"
             ],
             "@/public/*": [
-                "src/public/*"
+                "./src/public/*"
             ],
             "@/style/*": [
-                "src/public/style/*"
-            ]
+                "./src/public/style/*"
+            ],
+            "@/hooks/*": [
+                "./src/hooks/*"
+            ],
+            "@services/*": [
+                "./src/services/*"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ],
         }
     },
     "exclude": [

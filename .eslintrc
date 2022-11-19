@@ -3,6 +3,7 @@
     "next/core-web-vitals"
   ],
   "rules": {
+    "react/no-children-prop": "off",
     "jsx-a11y/alt-text": "off"
   }
 }
