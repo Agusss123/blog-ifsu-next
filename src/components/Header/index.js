@@ -33,32 +33,33 @@ const dataLinks = [
   },
   {
     title: 'Tutorial',
-    href: '/tutorial'
+    href: ''
   },
   {
     title: 'Buku',
-    href: '/buku'
+    href: ''
   }
 ]
 
 export const DefaultHeader = () => {
   return (
-    // added postion fixed to box
     <Box position="fixed">
-      <Header height={70} px={50}>
+      <Header height={70} px={70}>
         <Group position="apart" sx={{ height: '100%' }}>
-          <Group align="center" position="center" spacing="xs">
-            <DefaultLogo />
-            <Text mt={1} weight={800}>
-              Vinyles
-            </Text>
-          </Group>
+          <NextLink href="/">
+            <Group align="center" position="center" spacing="xs">
+              <DefaultLogo />
+              <Text mt={1} weight={800}>
+                Vinyles
+              </Text>
+            </Group>
+          </NextLink>
 
           <Group spacing="xs">
             {dataLinks.map((link, index) => (
               <Link key={index} href={link.href} title={link.title} />
             ))}
-            <DefaultButton text="Join Newsletter" radius="md" varian="secondary" />
+            <DefaultButton text="Join Newsletter" radius="md" varian="primary" />
           </Group>
         </Group>
       </Header>

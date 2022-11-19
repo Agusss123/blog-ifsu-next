@@ -2,6 +2,7 @@ import { Container } from '@/components/Container'
 import { MantineProvider } from '@mantine/core'
 import Head from 'next/head'
 import { RouterTransition } from '@/components/Animation/Loading'
+import { SWRConfig } from 'swr'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }) {
         <meta name="robots" content="index, follow" />
         <title>Next Mantine</title>
       </Head>
+      <SWRConfig value={{ revalidateOnFocus: false }} />
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'light', fontFamily: 'Open Sans' }}>
         <Container>
           <RouterTransition />
