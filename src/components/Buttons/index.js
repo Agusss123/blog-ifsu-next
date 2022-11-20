@@ -1,7 +1,16 @@
 import { Button, createStyles, Text } from '@mantine/core'
 import Link from 'next/link'
 
-export const DefaultButton = ({ text, varian = 'primary', url, size = 'md', rounded = 'md', external }) => {
+export const DefaultButton = ({
+  text,
+  varian = 'primary',
+  url,
+  size = 'md',
+  rounded = 'md',
+  external,
+  nextBlog,
+  prevBlog
+}) => {
   // custom styles for button
   const useStyles = createStyles((theme) => {
     switch (varian) {
