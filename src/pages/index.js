@@ -1,10 +1,13 @@
 import { CardsCarousel } from '@/components/Sliders/BlogSliders'
 import { useFetcher } from '@/hooks/useFetcher'
-import { Box, Flex, Text, SimpleGrid } from '@mantine/core'
+import { Box, Flex, Text, SimpleGrid, Pagination } from '@mantine/core'
 import { VerticalArticleCard } from '@/components/Card/ArticleCard'
+import { useState } from 'react'
+import { Paginations } from '@/components/Pagination'
 
 export default function Home() {
-  const { data, isLoading } = useFetcher('blogs?populate=*')
+  const [activePage, setPage] = useState(1)
+  const { data, isLoading, meta } = useFetcher(`blogs?populate=*&pagination[pageSize]=4&pagination[page]=${activePage}`)
 
   return (
     <Box my={100}>
@@ -35,6 +38,9 @@ export default function Home() {
                 />
               ))}
             </SimpleGrid>
+          </Box>
+          <Box>
+            <Paginations page={activePage} onChange={setPage} total={meta?.pagination?.pageCount} size="lg" />
           </Box>
         </>
       )}

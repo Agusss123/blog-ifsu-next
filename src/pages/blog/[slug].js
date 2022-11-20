@@ -1,8 +1,8 @@
-import { Button, Container, Flex, Grid, Group, Text } from '@mantine/core'
-import api from '@services/api'
 import { Markdown } from '@/components/Markdown'
-import Link from 'next/link'
+import { Container, Flex, Group, Text, Grid } from '@mantine/core'
+import api from '@services/api'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons'
+import Link from 'next/link'
 
 const BlogDetail = ({ data }) => {
   // replace &nbsp; with a space and customize in markdown component
@@ -23,22 +23,32 @@ const BlogDetail = ({ data }) => {
 
       <Markdown children={content} />
 
-      <Group spacing="xs" position="center" my={30}>
-        <Flex>
-          <Link href="/">
-            <Button color="gray.7" variant="subtle" radius="md" px={20} py={20} bg="gray.1" rightIcon={<IconChevronLeft />}>
-              Preview Mode for Static Generation
-            </Button>
-          </Link>
-        </Flex>
-        <Flex>
-          <Link href="/">
-            <Button color="gray.7" variant="subtle" radius="md" px={20} py={20} bg="gray.1" leftIcon={<IconChevronRight />}>
-              Belajar figjam untuk brainstorming
-            </Button>
-          </Link>
-        </Flex>
-      </Group>
+      <Grid mx="auto" justify="center" mt={80}>
+        <Grid.Col md={5}>
+          {data?.attributes?.previousBlog && (
+            <Link href={`/blog/${data?.attributes?.previousBlog?.slug}`}>
+              <Flex direction="row" gap="xs" px={10} py={10} bg="gray.1" align="center" sx={{ borderRadius: '6px' }}>
+                <Text lineClamp={1} sx={{ flex: '1 1 0%' }} fw={600}>
+                  {data?.attributes?.previousBlog?.title}
+                </Text>
+                <IconChevronLeft />
+              </Flex>
+            </Link>
+          )}
+        </Grid.Col>
+        <Grid.Col md={5}>
+          {data?.attributes?.nextBlog && (
+            <Link href={`/blog/${data?.attributes?.nextBlog?.slug}`}>
+              <Flex direction="row" gap="xs" px={10} py={10} bg="gray.1" align="center" sx={{ borderRadius: '6px' }}>
+                <IconChevronRight />
+                <Text lineClamp={1} sx={{ flex: '1 1 0%' }} fw={600}>
+                  {data?.attributes?.nextBlog?.title}
+                </Text>
+              </Flex>
+            </Link>
+          )}
+        </Grid.Col>
+      </Grid>
     </Container>
   )
 }
