@@ -4,7 +4,7 @@ import { DefaultFooter } from '@/components/Footer'
 import { Fragment } from 'react'
 
 // Wrapp all pages with AppShell for consistent layout
-export const Container = ({ children }) => {
+export const Container = ({ children, withHeader = true, withFooter = true }) => {
   return (
     <Fragment>
       <AppShell
@@ -15,10 +15,10 @@ export const Container = ({ children }) => {
           }
         }}
         px={70}
-        header={<DefaultHeader />}>
+        header={withHeader && <DefaultHeader />}>
         {children}
       </AppShell>
-      <DefaultFooter />
+      {withFooter && <DefaultFooter />}
     </Fragment>
   )
 }
