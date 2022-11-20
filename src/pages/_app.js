@@ -3,8 +3,12 @@ import { MantineProvider } from '@mantine/core'
 import Head from 'next/head'
 import { RouterTransition } from '@/components/Animation/Loading'
 import { SWRConfig } from 'swr'
+import { useRouter } from 'next/router'
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter()
+  // when router includes /auth, remove header and footer
+  const includes = router?.pathname?.includes('/auth') ? false : true
   return (
     <>
       <Head>
@@ -14,7 +18,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SWRConfig value={{ revalidateOnFocus: false }} />
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'light', fontFamily: 'Open Sans' }}>
-        <Container>
+        <Container withFooter={includes} withHeader={includes}>
           <RouterTransition />
           <Component {...pageProps} />
         </Container>
