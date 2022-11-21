@@ -21,8 +21,7 @@ const MarkdownComponent = {
       alt={props.alt}
       {...omit(props, 'node')}
       style={{
-        width: '110%',
-        marginLeft: '-5%'
+        width: '100%'
       }}
     />
   )

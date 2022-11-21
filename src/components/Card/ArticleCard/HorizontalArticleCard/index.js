@@ -1,6 +1,5 @@
-import { createStyles, Paper, Text, Title, Overlay } from '@mantine/core'
-import Link from 'next/link'
-import { DefaultButton } from '@/components/Buttons'
+import { DefaultButton } from '@/components/Button'
+import { createStyles, Overlay, Paper, Text, Title, Box } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -12,7 +11,18 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    zIndex: 10
+    zIndex: 10,
+    ':before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.56) -7.13%, rgba(0, 0, 0, 0) 100%)',
+      zIndex: -1,
+      borderRadius: theme.radius.sm
+    }
   },
 
   title: {
@@ -36,21 +46,18 @@ export const HorizontalArticleCard = ({ image, title, category, link }) => {
   const { classes } = useStyles()
 
   return (
-    <Paper shadow="md" p="md" radius="md" sx={{ backgroundImage: `url(${image})` }} className={classes.card}>
-      <Overlay
-        gradient={`linear-gradient(180deg, rgba(0, 0, 0, 0.56) -7.13%, rgba(0, 0, 0, 0) 100%)`}
-        radius="10px"
-        zIndex={-1}
-      />
-      <div>
-        <Text className={classes.category} size="xs">
-          {category}
-        </Text>
-        <Title order={3} className={classes.title} lineClamp={3}>
-          {title}
-        </Title>
-      </div>
-      <DefaultButton text="Read article" varian="secondary" url={link} />
-    </Paper>
+    <Box maw="100%">
+      <Paper shadow="md" radius="md" sx={{ backgroundImage: `url(${image})` }} className={classes?.card} p="10%">
+        <div>
+          <Text className={classes.category} size="xs">
+            {category}
+          </Text>
+          <Title order={3} className={classes.title} lineClamp={3}>
+            {title}
+          </Title>
+        </div>
+        <DefaultButton text="Read article" varian="secondary" url={link} />
+      </Paper>
+    </Box>
   )
 }

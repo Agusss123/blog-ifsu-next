@@ -4,20 +4,20 @@ const useStyles = createStyles(() => ({
   pagination: {
     button: {
       //   hide number in pagination
-      '&:not(:first-child):not(:last-child)': {
+      '&:not(:first-of-type):not(:last-child)': {
         display: 'none'
       }
     }
   }
 }))
-export const Paginations = ({ page, onChange, total, size = 'md' }) => {
+export const Paginations = ({ page, onChange, total, size = 'md', position = 'center' }) => {
   const { classes } = useStyles()
   return (
     <Pagination
       page={page}
       onChange={onChange}
       total={total}
-      position="center"
+      position={position}
       className={classes?.pagination}
       size={size}
     />
