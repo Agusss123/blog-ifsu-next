@@ -1,4 +1,4 @@
-import { Button, Container, createStyles, Group, Text, Title } from '@mantine/core'
+import { Button, Container, createStyles, Group, Text } from '@mantine/core'
 import Link from 'next/link'
 
 const useStyles = createStyles((theme) => ({

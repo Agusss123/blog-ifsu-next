@@ -1,8 +1,8 @@
-import { Container } from '@/components/Container'
+import { RouterTransition } from '@/components/Animation/Loading'
 import { MantineProvider } from '@mantine/core'
 import Head from 'next/head'
-import { RouterTransition } from '@/components/Animation/Loading'
 import { SWRConfig } from 'swr'
+import { NotificationsProvider } from '@mantine/notifications'
 
 /**
  * _app.js adalah fitur Next.js yang memungkinkan Anda untuk melakukan override pada halaman aplikasi Anda.
@@ -27,10 +27,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <SWRConfig value={{ revalidateOnFocus: false }} />
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'light', fontFamily: 'Open Sans' }}>
-        <Container>
-          <RouterTransition />
+        <RouterTransition />
+        <NotificationsProvider position="top-center" zIndex={2077}>
           <Component {...pageProps} />
-        </Container>
+        </NotificationsProvider>
       </MantineProvider>
     </>
   )

@@ -1,8 +1,7 @@
-import { DefaultButton } from '@/components/Buttons'
 import { DefaultLogo } from '@/components/Icons'
-import { Box, Group, Button, Header, Text } from '@mantine/core'
-import { useRouter } from 'next/router'
+import { Box, Button, Group, Header, Text } from '@mantine/core'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 
 const Link = ({ title, href }) => {
   const router = useRouter()
@@ -30,18 +29,10 @@ const dataLinks = [
   {
     title: 'Home',
     href: '/'
-  },
-  {
-    title: 'Tutorial',
-    href: ''
-  },
-  {
-    title: 'Buku',
-    href: ''
   }
 ]
 
-export const DefaultHeader = () => {
+export const DefaultHeader = ({ withLink = true }) => {
   return (
     <Box position="fixed">
       <Header height={70} px={70}>
@@ -55,12 +46,13 @@ export const DefaultHeader = () => {
             </Group>
           </NextLink>
 
-          <Group spacing="xs">
-            {dataLinks.map((link, index) => (
-              <Link key={index} href={link.href} title={link.title} />
-            ))}
-            <DefaultButton text="Join Newsletter" radius="md" varian="primary" />
-          </Group>
+          {withLink && (
+            <Group spacing="xs">
+              {dataLinks.map((link, index) => (
+                <Link key={index} href={link.href} title={link.title} />
+              ))}
+            </Group>
+          )}
         </Group>
       </Header>
     </Box>
