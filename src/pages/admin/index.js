@@ -33,18 +33,22 @@ const DashboardPage = () => {
               </Button>
             </Link>
           </Group>
-          {!isLoading && (
-            <Box mb="xl">
-              <DataTable data={data} />
-              <Paginations
-                page={activePage}
-                onChange={setPage}
-                total={meta?.pagination?.pageCount}
-                size="lg"
-                position="apart"
-              />
-            </Box>
-          )}
+
+          {/* Jika data lebih dari 0 set height auto, jika kurang set 63vh */}
+          <Box mb="xl" h={data?.length > 0 ? 'auto' : '63vh'}>
+            {!isLoading && data?.length > 0 && (
+              <>
+                <DataTable data={data} />
+                <Paginations
+                  page={activePage}
+                  onChange={setPage}
+                  total={meta?.pagination?.pageCount}
+                  size="lg"
+                  position="apart"
+                />
+              </>
+            )}
+          </Box>
         </Container>
       </Flex>
     </>

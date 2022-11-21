@@ -26,7 +26,7 @@ export default function Home() {
         </Flex>
 
         {/* Blog Section */}
-        {!isLoading && (
+        {!isLoading && data?.length > 0 && (
           <>
             <Box my="50px" mx={0}>
               <CardsCarousel />
