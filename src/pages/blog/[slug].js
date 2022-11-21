@@ -4,6 +4,12 @@ import api from '@services/api'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons'
 import Link from 'next/link'
 
+/**
+ *
+ * @param { data }
+ * data diambil dari getServerSideProps
+ * @returns
+ */
 const BlogDetail = ({ data }) => {
   // replace &nbsp; with a space and customize in markdown component
   const content = data.attributes.content.replaceAll('&nbsp;', '')
@@ -53,24 +59,38 @@ const BlogDetail = ({ data }) => {
   )
 }
 
+/**
+ * getServerSideProps memungkinkan kita untuk memuat data dari server secara ssr
+ * ssr = server side rendering
+ * @param {*} ctx context api bawaan dari nextjs
+ * @returns
+ */
 export const getServerSideProps = async (ctx) => {
+  // ambil slug dari url
+  // slug digunakan untuk mengambil detail blog dari api
   const query = ctx.query
   const slug = query.slug
+
+  // fetch data dari api menggunakan axios
   const data = await api
-    .get(`${process.env.API_URL}/api/blogs/${slug}`)
-    .then(({ data }) => data)
+    .get(`/api/blogs/${slug}`)
+    .then(({ data }) => data) // jika api berhasil dan data ada, maka kita ambil datanya
     .catch((e) => {
       console.log(e)
-      return {}
+      // jika api tidak berhasil dan data tidak ada, maka kita tidak mengembalikan apa apa
+      return null
     })
+  // jika data kosong, kita arahkan ke halaman daftar blog
   if (!data || Object.keys(data).length === 0) {
     return {
+      // redirect = bawaan nextjs, untuk mengarahkan ke halaman tertentu
       redirect: {
-        permanent: false,
+        permanent: false, // jika true, maka selamanya halaman ini akan diarahkan ke halaman lain
         destination: `/blog`
       }
     }
   }
+  // jika data ada, muat data halaman detail blog
   return {
     props: {
       data: data?.data

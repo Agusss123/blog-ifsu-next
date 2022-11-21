@@ -4,6 +4,19 @@ import Head from 'next/head'
 import { RouterTransition } from '@/components/Animation/Loading'
 import { SWRConfig } from 'swr'
 
+/**
+ * _app.js adalah fitur Next.js yang memungkinkan Anda untuk melakukan override pada halaman aplikasi Anda.
+ * _app.js bisa dirender di sisi server dan sisi client.
+ * _app.js bertindak sebagai entry point, dan akan dijalankan pertama kali sebelum halaman lainnya dijalankan.
+ * _app.js dapat digunakan untuk:
+ * - Mengatur state global yang dapat diakses oleh semua halaman
+ * - Mengatur provider yang dapat diakses oleh semua halaman
+ * - Mengatur halaman yang akan dijalankan sebelum semua halaman lainnya
+ * - Mengatur halaman yang akan dijalankan ketika semua halaman lainnya telah dijalankan
+ * - Mengatur halaman yang akan dijalankan ketika terjadi error
+ * - Mengatur halaman yang akan dijalankan ketika terjadi error ketika semua halaman lainnya telah dijalankan
+ * @returns
+ */
 export default function App({ Component, pageProps }) {
   return (
     <>

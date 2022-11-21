@@ -3,6 +3,12 @@ import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 const getInitialProps = createGetInitialProps()
 
+/**
+ * _document.js hanya dapat dijalankan di sisi server.
+ * _document.js bertindak sebagai pembungkus untuk semua halaman dan yang akan pertama dijalankan bahkan sebelum _app.js
+ * biasanya, _document.js digunakan untuk tag pembungkus seperti <html>, <head>, dan <body>
+ * file lain selain _document.js TIDAK AKAN BISA mengakses tag pembungkus seperti <html>, <head>, dan <body>
+ */
 export default class _Document extends Document {
   static getInitialProps = getInitialProps
 
