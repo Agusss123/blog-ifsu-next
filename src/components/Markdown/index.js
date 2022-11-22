@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm'
 import { omit } from '@utils/index'
 import { Image, Text } from '@mantine/core'
 
+// membuat komponen markdown
 const MarkdownComponent = {
   p: (props) => (
     <Text my="1rem" fw={400} color="gray.8" {...omit(props, 'node')}>
@@ -32,7 +33,7 @@ export const Markdown = ({ children }) => {
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
-      transformImageUri={(uri) => (uri.startsWith('http') ? uri : `${process.env.API_URL}${uri}`)}
+      transformImageUri={(uri) => (uri.startsWith('http') ? uri : `${process.env.API_URL}${uri}`)} // jika uri tidak diawali dengan http maka tambahkan url api dari env
       children={children}
       components={MarkdownComponent}
     />

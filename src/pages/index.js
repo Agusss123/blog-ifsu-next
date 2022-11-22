@@ -7,8 +7,13 @@ import { useState } from 'react'
 import { Layout } from '@/components/Layout'
 
 export default function Home() {
+  // state untuk menampung paginasi halaman aktip dari strapi
   const [activePage, setPage] = useState(1)
+
+  // limit yang akan ditampilkan
   const LIMIT = 4
+
+  // ambil data blog dari strapi dan masukan ke dalam variable yang sudah di set di hooks useFetcher
   const { data, isLoading, meta } = useFetcher(
     `blogs?populate=*&pagination[pageSize]=${LIMIT}&pagination[page]=${activePage}`
   )
@@ -25,7 +30,7 @@ export default function Home() {
           </Text>
         </Flex>
 
-        {/* Blog Section */}
+        {/* jika tidak loading dan data lebih dari 0 */}
         {!isLoading && data?.length > 0 && (
           <>
             <Box my="50px" mx={0}>
@@ -33,6 +38,7 @@ export default function Home() {
             </Box>
             <Box my="50px" mx={0}>
               <SimpleGrid cols={2}>
+                {/* looping data untuk ditampilkan dan slice (kembalikan data dari array ke 4) */}
                 {data?.slice(0, 4).map((blog, index) => (
                   <VerticalArticleCard
                     key={index}

@@ -2,6 +2,7 @@ import { Anchor, Avatar, createStyles, Group, Text, UnstyledButton } from '@mant
 import { IconChevronRight } from '@tabler/icons'
 import Link from 'next/link'
 
+// membuat style untuk komponen menggunakan hook createStyles dari mantine
 const useStyles = createStyles((theme) => ({
   user: {
     display: 'block',
@@ -16,6 +17,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export const UserButton = ({ image, name }) => {
+  // memanggil hook createStyles dan menyimpannya ke dalam variable classes
   const { classes } = useStyles()
 
   return (
@@ -28,7 +30,7 @@ export const UserButton = ({ image, name }) => {
             {name}
           </Text>
 
-          <Link href="/auth/logout">
+          <Link href="/">
             <Anchor color="red" size="xs" fw="bold">
               Keluar
             </Anchor>

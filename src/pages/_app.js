@@ -25,9 +25,14 @@ export default function App({ Component, pageProps }) {
         <meta name="robots" content="index, follow" />
         <title>Next Mantine</title>
       </Head>
+
+      {/* SWRConfig - konfigurasi global swr, revalidateOnFocus digunakan ketika memfokuskan ulang halaman atau beralih antar tab, SWR secara otomatis memvalidasi ulang data. */}
       <SWRConfig value={{ revalidateOnFocus: false }} />
+      {/* MantineProvider - konfigurasi global untuk komponent mantine */}
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'light', fontFamily: 'Open Sans' }}>
+        {/* RouterTransition - component untuk memuat loading dari mantine ketika halaman dimuat */}
         <RouterTransition />
+        {/* NotificationsProvider - component untuk memuat konfigurasi notifikasi mantine secara global */}
         <NotificationsProvider position="top-center" zIndex={2077}>
           <Component {...pageProps} />
         </NotificationsProvider>

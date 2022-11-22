@@ -4,17 +4,21 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 const Link = ({ title, href }) => {
+  // ambil router dari next
   const router = useRouter()
+
+  // jika href sama dengan router maka set sebagai aktip
   const active = router?.asPath == href
   return (
-    // sx hover in button backgruond none
     <NextLink href={href}>
       <Button
         as="a"
         variant="subtle"
         px={10}
+        // sx props global style dari mantine untuk mengambil style dari global component mantine
         sx={(theme) => ({
           backgroundColor: 'transparent',
+          // contonh nya mengambil style dari global component color
           color: theme.colors.gray[7],
           fontWeight: active ? 700 : 400,
           '&:hover': { backgroundColor: 'transparent' }
@@ -25,6 +29,7 @@ const Link = ({ title, href }) => {
   )
 }
 
+// dummy data untuk header
 const dataLinks = [
   {
     title: 'Home',

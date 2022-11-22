@@ -1,12 +1,14 @@
-import { Carousel } from '@mantine/carousel'
 import { HorizontalArticleCard } from '@/components/Card'
 import { useFetcher } from '@/hooks/useFetcher'
-import { Box, Container } from '@mantine/core'
+import { Carousel } from '@mantine/carousel'
 
 export const CardsCarousel = () => {
+  // ambil data blog dari strapi dan masukan ke dalam variable yang sudah di set di hooks useFetcher
   const { data, isLoading } = useFetcher(`blogs?populate=*`)
+
   return (
     <>
+      {/* jika tidak loading tampilkan carousel  */}
       {!isLoading && (
         <Carousel
           slideSize="25%"
@@ -18,14 +20,12 @@ export const CardsCarousel = () => {
           withControls={data?.length > 4 ? true : false}>
           {data.map((blog, index) => (
             <Carousel.Slide key={index}>
-              {/* <Box w="100%" key={index} h={100} bg="red"> */}
               <HorizontalArticleCard
                 image={process.env.API_URL + blog?.attributes?.thumbnail?.data?.attributes?.url}
                 title={blog?.attributes?.title}
                 category={blog?.attributes?.category?.data?.attributes?.title}
                 link={`/blog/${blog?.attributes?.slug}`}
               />
-              {/* </Box> */}
             </Carousel.Slide>
           ))}
         </Carousel>

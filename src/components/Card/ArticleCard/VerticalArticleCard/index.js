@@ -2,6 +2,7 @@ import { Card, createStyles, Image, Text } from '@mantine/core'
 import { toLocaleDate } from '@utils/lib/toLocaleDate'
 import Link from 'next/link'
 
+// membuat style untuk komponen menggunakan hook createStyles dari mantine
 const useStyles = createStyles(() => ({
   card: {
     transition: 'transform 150ms ease, box-shadow 150ms ease',
@@ -14,6 +15,7 @@ const useStyles = createStyles(() => ({
 }))
 
 export const VerticalArticleCard = ({ title, image, date, link }) => {
+  // memanggil hook createStyles dan menyimpannya ke dalam variable classes
   const { classes } = useStyles()
   return (
     <Link href={link}>

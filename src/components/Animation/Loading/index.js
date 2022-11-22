@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import { completeNavigationProgress, NavigationProgress, startNavigationProgress } from '@mantine/nprogress'
 import { useRouter } from 'next/router'
-import { startNavigationProgress, completeNavigationProgress, NavigationProgress } from '@mantine/nprogress'
+import { useEffect } from 'react'
 
 export const RouterTransition = () => {
+  // ambil router dari next
   const router = useRouter()
 
+  // ketika router berubah maka jalankan fungsi
   useEffect(() => {
     const handleStart = (url) => url !== router.asPath && startNavigationProgress()
     const handleComplete = () => completeNavigationProgress()

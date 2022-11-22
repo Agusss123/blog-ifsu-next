@@ -1,6 +1,7 @@
 import { Button, Container, createStyles, Group, Text } from '@mantine/core'
 import Link from 'next/link'
 
+// membuat style untuk komponen menggunakan hook createStyles dari mantine
 const useStyles = createStyles((theme) => ({
   root: {
     paddingTop: 80
@@ -26,6 +27,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 const NotFoundPage = () => {
+  // memanggil hook createStyles dan menyimpannya ke dalam variable classes
   const { classes } = useStyles()
 
   return (

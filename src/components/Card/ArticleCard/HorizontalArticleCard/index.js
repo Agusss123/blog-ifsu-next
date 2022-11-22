@@ -1,6 +1,7 @@
 import { DefaultButton } from '@/components/Button'
-import { createStyles, Overlay, Paper, Text, Title, Box } from '@mantine/core'
+import { Box, createStyles, Paper, Text, Title } from '@mantine/core'
 
+// membuat style untuk komponen menggunakan hook createStyles dari mantine
 const useStyles = createStyles((theme) => ({
   card: {
     position: 'relative',
@@ -43,6 +44,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 export const HorizontalArticleCard = ({ image, title, category, link }) => {
+  // memanggil hook createStyles dan menyimpannya ke dalam variable classes
   const { classes } = useStyles()
 
   return (

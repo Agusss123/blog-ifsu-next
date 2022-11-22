@@ -1,15 +1,16 @@
 import { Box, Button, Flex, Group, Menu, Text, Title } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import api from '@services/api'
-import { IconDotsVertical, IconEdit, IconTrash, IconCheck, IconX } from '@tabler/icons'
+import { IconCheck, IconDotsVertical, IconEdit, IconTrash, IconX } from '@tabler/icons'
 import { toLocaleDate } from '@utils/index'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export const DataTable = ({ data }) => {
+  // ambil router dari next
   const router = useRouter()
 
-  // Function untuk menghapus data dengan mengambil id dari cta buttion
+  // function untuk menghapus data dengan mengambil id dari button
   const handleDelete = (id) => {
     api
       .delete(`/api/blogs/${id}`)
@@ -19,6 +20,7 @@ export const DataTable = ({ data }) => {
           title: 'Data berhasil dihapus',
           icon: <IconCheck />,
           onClose: () => {
+            // ketika notifikasi di close maka refresh halaman
             router?.replace(router?.asPath, undefined, { scroll: false })
           }
         })
@@ -33,8 +35,9 @@ export const DataTable = ({ data }) => {
   }
 
   return (
+    // sx props global style dari mantine untuk mengambil style dari global component mantine
     <Box sx={(theme) => ({ border: `1.5px solid ${theme.colors.gray[5]}`, borderRadius: '10px' })} my="xl">
-      {/* Looping data dari props */}
+      {/* perulangan data dari props komponent */}
       {data.map((row, index) => (
         <Group
           position="apart"
