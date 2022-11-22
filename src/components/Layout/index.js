@@ -1,10 +1,10 @@
-import { AppShell } from '@mantine/core'
-import { DefaultHeader } from '@/components/Header'
 import { DefaultFooter } from '@/components/Footer'
+import { DefaultHeader } from '@/components/Header'
+import { AppShell } from '@mantine/core'
 import { Fragment } from 'react'
 
-// Wrapp all pages with AppShell for consistent layout
-export const Layout = ({ children, withHeader, withFooter }) => {
+// Bungkus semua halaman dengan AppShell untuk tata letak yang konsisten
+export const Layout = ({ children, withHeader, withFooter, withoutPadding = false }) => {
   return (
     <Fragment>
       <AppShell
@@ -13,7 +13,7 @@ export const Layout = ({ children, withHeader, withFooter }) => {
             padding: '0px'
           }
         }}
-        px={70}
+        px={withoutPadding ? withoutPadding : 70}
         header={withHeader && <DefaultHeader />}>
         {children}
       </AppShell>

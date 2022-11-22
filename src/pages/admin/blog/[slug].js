@@ -7,19 +7,24 @@ import Link from 'next/link'
 import { useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 
+// muat komponen RichTextEditor secara dinamis dan tidak di render di server
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false })
 
+/**
+ *
+ * @param { data }
+ * data diambil dari getServerSideProps
+ * @returns
+ */
+
 const EditBlogPage = ({ data }) => {
-  // Konten
-  const dataContent = data?.attributes?.content
-  // Id Blog
-  const id = data?.id
-  // Ambil tag img dari konten dan tambahkan env ke url
-  const content = dataContent?.replace(/<img src="\/uploads/g, `<img src="${process.env.API_URL}/uploads`)
+  // ambil tag img dari konten dan tambahkan env ke url dengan regex (reguler expresion)
+  const content = data?.attributes?.content?.replace(/<img src="\/uploads/g, `<img src="${process.env.API_URL}/uploads`)
+
   // State untuk menampung konten jika value editor berubah
   const [value, onChange] = useState(content)
 
-  // Function untuk handle upload image
+  // function untuk menghandle ketika upload image
   const handleImageUpload = useCallback(
     (file) =>
       new Promise(async (resolve, reject) => {
@@ -36,12 +41,12 @@ const EditBlogPage = ({ data }) => {
     []
   )
 
-  // Function untuk mengubah data jalankan secara async untuk menunggu data selesai diubah
+  // function untuk mengubah data jalankan secara async untuk menunggu data selesai diubah
   const handleSubmit = async (e) => {
     // saat function dijalanan, prevent default agar tidak reload
     e.preventDefault()
 
-    // ambil data dari form
+    // ambil data dari form dan masukan ke dalam variable/objek data untuk dikirim ke API
     const data = {
       data: {
         title: e.target.title.value,
@@ -49,9 +54,9 @@ const EditBlogPage = ({ data }) => {
       }
     }
 
-    // post data ke api
+    // post data ke api menggunakan axios
     api
-      .put(`/api/blogs/${id}`, data)
+      .put(`/api/blogs/${data?.id}`, data)
       .then(() => {
         // jika berhasil
         showNotification({
@@ -99,24 +104,38 @@ const EditBlogPage = ({ data }) => {
   )
 }
 
+/**
+ * getServerSideProps memungkinkan kita untuk memuat data dari server secara ssr
+ * ssr = server side rendering
+ * @param {*} ctx context api bawaan dari nextjs
+ * @returns
+ */
 export const getServerSideProps = async (ctx) => {
+  // ambil slug dari url
+  // slug digunakan untuk mengambil detail blog dari api
   const query = ctx.query
   const slug = query.slug
+
+  // fetch data dari api menggunakan axios
   const data = await api
     .get(`${process.env.API_URL}/api/blogs/${slug}`)
-    .then(({ data }) => data)
+    .then(({ data }) => data) // jika api berhasil dan data ada, maka kita ambil datanya
     .catch((e) => {
       console.log(e)
-      return {}
+      // jika api tidak berhasil dan data tidak ada, maka kita tidak mengembalikan apa apa
+      return null
     })
+  // jika data kosong, kita arahkan ke halaman daftar blog
   if (!data || Object.keys(data).length === 0) {
     return {
+      // redirect = bawaan nextjs, untuk mengarahkan ke halaman tertentu
       redirect: {
-        permanent: false,
+        permanent: false, // jika true, maka selamanya halaman ini akan diarahkan ke halaman lain
         destination: `/blog`
       }
     }
   }
+  // jika data ada, muat data halaman detail blog
   return {
     props: {
       data: data?.data

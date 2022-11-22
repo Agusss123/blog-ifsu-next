@@ -1,17 +1,8 @@
 import { Button, createStyles, Text } from '@mantine/core'
 import Link from 'next/link'
 
-export const DefaultButton = ({
-  text,
-  varian = 'primary',
-  url,
-  size = 'md',
-  rounded = 'md',
-  external,
-  nextBlog,
-  prevBlog
-}) => {
-  // custom styles for button
+export const DefaultButton = ({ text, varian = 'primary', url, size = 'md', rounded = 'md', external }) => {
+  // membuat style untuk komponen menggunakan hook createStyles dari mantine
   const useStyles = createStyles((theme) => {
     switch (varian) {
       case 'primary':
@@ -42,8 +33,9 @@ export const DefaultButton = ({
     }
   })
 
+  // memanggil hook createStyles dan menyimpannya ke dalam variable classes
   const { classes } = useStyles()
-  // if external is true, open link in new tab
+  // jika eksternal benar, buka tautan di tab baru
   if (external) {
     return (
       <a href={url} target="_blank" rel="noreferrer">
@@ -54,7 +46,7 @@ export const DefaultButton = ({
     )
   }
 
-  // if has url
+  // jika url tidak kosong, buka tautan menggunakan next/link
   if (url) {
     return (
       <Link href={url}>
@@ -67,7 +59,7 @@ export const DefaultButton = ({
     )
   }
 
-  // else return default button
+  // jika bukan kedua diatas kembalikan sebagai button biasa
   return (
     <Button variant={varian} radius={rounded} size={size} className={classes.button}>
       <Text mt={1}>{text}</Text>

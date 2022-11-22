@@ -8,15 +8,16 @@ import { useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
+// muat komponen RichTextEditor secara dinamis dan tidak di render di server
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false })
 
 const CreateBlogPage = () => {
   const router = useRouter()
 
-  // State untuk menampung konten
+  // state untuk menampung konten
   const [value, onChange] = useState('')
 
-  // Function untuk handle upload image
+  // function untuk handle upload image
   const handleImageUpload = useCallback(
     (file) =>
       new Promise(async (resolve, reject) => {
@@ -33,12 +34,12 @@ const CreateBlogPage = () => {
     []
   )
 
-  // Function untuk menambah data jalankan secara async untuk menunggu data selesai diubah
+  // function untuk menambah data jalankan secara async untuk menunggu data selesai diubah
   const handleSubmit = async (e) => {
     // saat function dijalanan, prevent default agar tidak reload
     e.preventDefault()
 
-    // ambil data dari form
+    // ambil data dari form dan masukan ke dalam variable/objek data untuk dikirim ke API
     const data = {
       data: {
         title: e.target.title.value,
@@ -46,7 +47,7 @@ const CreateBlogPage = () => {
       }
     }
 
-    // post data ke api
+    // post data ke api menggunakan axios
     api
       .post(`/api/blogs`, data)
       .then(() => {
@@ -55,6 +56,7 @@ const CreateBlogPage = () => {
           title: 'Data berhasil ditambahkan',
           icon: <IconCheck />,
           onClose: () => {
+            // redirect ke halaman admin
             router?.push('/admin')
           }
         })

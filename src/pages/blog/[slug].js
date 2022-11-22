@@ -12,7 +12,7 @@ import Link from 'next/link'
  * @returns
  */
 const BlogDetail = ({ data }) => {
-  // replace &nbsp; with a space and customize in markdown component
+  // ganti &nbsp; (atau bisa disebut non-breakable space) dengan string kosong
   const content = data.attributes.content.replaceAll('&nbsp;', '')
 
   return (
@@ -32,7 +32,7 @@ const BlogDetail = ({ data }) => {
         <Markdown children={content} />
 
         <Grid mx="auto" justify="center" mt={80}>
-          <Grid.Col md={5}>
+          <Grid.Col md={5} sx={{ cursor: 'pointer' }}>
             {data?.attributes?.previousBlog && (
               <Link href={`/blog/${data?.attributes?.previousBlog?.slug}`}>
                 <Flex direction="row" gap="xs" px={10} py={10} bg="gray.1" align="center" sx={{ borderRadius: '6px' }}>
@@ -44,7 +44,7 @@ const BlogDetail = ({ data }) => {
               </Link>
             )}
           </Grid.Col>
-          <Grid.Col md={5}>
+          <Grid.Col md={5} sx={{ cursor: 'pointer' }}>
             {data?.attributes?.nextBlog && (
               <Link href={`/blog/${data?.attributes?.nextBlog?.slug}`}>
                 <Flex direction="row" gap="xs" px={10} py={10} bg="gray.1" align="center" sx={{ borderRadius: '6px' }}>
