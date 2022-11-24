@@ -43,7 +43,7 @@ export default function Home() {
                   <VerticalArticleCard
                     key={index}
                     title={blog?.attributes?.title}
-                    image={process.env.API_URL + blog?.attributes?.thumbnail?.data?.attributes?.url}
+                    image={blog?.attributes?.thumbnail?.data?.attributes?.url}
                     date={blog?.attributes?.createdAt}
                     link={`/blog/${blog?.attributes?.slug}`}
                   />
