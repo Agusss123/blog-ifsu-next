@@ -21,7 +21,7 @@ export const CardsCarousel = () => {
           {data.map((blog, index) => (
             <Carousel.Slide key={index}>
               <HorizontalArticleCard
-                image={process.env.API_URL + blog?.attributes?.thumbnail?.data?.attributes?.url}
+                image={blog?.attributes?.thumbnail?.data?.attributes?.url}
                 title={blog?.attributes?.title}
                 category={blog?.attributes?.category?.data?.attributes?.title}
                 link={`/blog/${blog?.attributes?.slug}`}

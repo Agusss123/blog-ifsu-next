@@ -33,7 +33,7 @@ export const Markdown = ({ children }) => {
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
-      transformImageUri={(uri) => (uri.startsWith('http') ? uri : `${process.env.API_URL}${uri}`)} // jika uri tidak diawali dengan http maka tambahkan url api dari env
+      transformImageUri={(uri) => (uri.startsWith('http') ? uri : `${uri}`)} // jika uri tidak diawali dengan http maka tambahkan url api dari env
       children={children}
       components={MarkdownComponent}
     />
